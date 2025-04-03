@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-kube-app
+spec:
+  replicas: 2  # Number of instances
+  selector:
+    matchLabels:
+      app: my-kube-app
+  template:
+    metadata:
+      labels:
+        app: my-kube-app
+    spec:
+      containers:
+        - name: my-kube-app
+          image: my-kube-app:latest  # Ensure this matches your built Docker image
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000  # Match the FastAPI port

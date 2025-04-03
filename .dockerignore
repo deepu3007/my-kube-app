@@ -1,0 +1,18 @@
+# Ignore Python cache and virtual environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+
+# Ignore Git and Docker files
+.git/
+.gitignore
+Dockerfile
+.dockerignore
+
+# Ignore system-specific files
+*.swp
+.DS_Store
+Thumbs.db

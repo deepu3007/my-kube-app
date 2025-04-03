@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Order</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Restaurant Order System</h1>
+    
+    <form id="orderForm">
+        <label for="name">Customer Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="dish">Dish:</label>
+        <input type="text" id="dish" name="dish" required>
+        
+        <button type="submit">Place Order</button>
+    </form>
+
+    <h2>Order Status</h2>
+    <ul id="orderList"></ul>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const dish = document.getElementById('dish').value;
+
+            const response = await fetch('/place-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, dish })
+            });
+
+            const data = await response.json();
+            const orderList = document.getElementById('orderList');
+            const listItem = document.createElement('li');
+            listItem.textContent = `Order ID: ${data.order_id} - ${data.name} ordered ${data.dish}`;
+            orderList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

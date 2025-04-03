@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-kube-app-service
+spec:
+  selector:
+    app: my-kube-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000  # Match FastAPI port
+  type: NodePort
